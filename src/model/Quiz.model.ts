@@ -25,3 +25,4 @@ const QuizSchema: Schema<Quiz> = new Schema({
 const QuizModel =
   (mongoose.models.Quiz as mongoose.Model<Quiz>) ||
   mongoose.model<Quiz>('Quiz', QuizSchema);
+  export default QuizModel
