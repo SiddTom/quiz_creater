@@ -3,21 +3,22 @@ import dbConnect from "@/lib/dbconnect";
 import mongoose from "mongoose";
 import {User} from "next-auth"
 import {getServerSession} from "next-auth/next";
-import { authOptions } from '../auth/[...nextauth]/options';
+import {authOptions} from "@/app/api/auth/[...nextauth].js";
 
 export async function GET(request: Request){
     await dbConnect();
-    const session = await getServerSession(authOptions);
+    const session = await getServerSession(authOptions)
 
-    const _user:User = session?.user;
-
-    if (!session || !_user) {
+    const _user = session?.user as User;
+    
+    if (!session) {
         return Response.json(
           { success: false, message: 'Not authenticated' },
           { status: 401 }
         );
       }
-      const userId = new mongoose.Types.ObjectId(_user.id);
+      // const userId = new mongoose.Types.ObjectId(_user.id);
+      const userId = _user.id;
       try{
         const Quizs = await QuizModel.aggregate([
             {
