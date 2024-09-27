@@ -3,7 +3,7 @@ import dbConnect from "@/lib/dbconnect";
 import mongoose from "mongoose";
 import {User} from "next-auth"
 import {getServerSession} from "next-auth/next";
-import {authOptions} from "@/app/api/auth/[...nextauth].js";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route.js";
 
 export async function GET(request: Request){
     await dbConnect();
